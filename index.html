@@ -22,12 +22,11 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-in-out;
+            transition: transform 0.5s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        .container:hover {
+            transform: scale(1.05);
         }
 
         .fact-box {
@@ -36,11 +35,14 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             background-color: #f9f9f9;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
 
-        .fact-box:hover {
-            background-color: #e0e0e0;
+        .fact-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
         }
 
         button {
@@ -50,56 +52,76 @@
             border: none;
             border-radius: 4px;
             background-color: #007bff;
-            color: white;
-            transition: background-color 0.3s ease;
+            color: #fff;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         button:hover {
             background-color: #0056b3;
-        }
-
-        .image-container {
-            margin: 20px 0;
-        }
-
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Fun Fact Generator</h1>
-        <div class="image-container">
-            <img id="fact-image" src="https://via.placeholder.com/300" alt="Fun Fact Image">
-        </div>
         <div id="fact" class="fact-box">
-            Click the button to generate a fun fact!
+            <img id="factImage" src="" alt="Fact Image" style="display:none;">
+            <p id="factText">Click the button to see a fun fact!</p>
         </div>
-        <button id="generate-btn">Generate Fact</button>
+        <button id="generateFact">Generate Fact</button>
     </div>
     <script>
         const facts = [
-            { text: "Honey never spoils.", image: "https://via.placeholder.com/300/FFDD44" },
-            { text: "A day on Venus is longer than a year on Venus.", image: "https://via.placeholder.com/300/FFAA44" },
-            { text: "Bananas are berries, but strawberries aren't.", image: "https://via.placeholder.com/300/FF7744" },
-            { text: "There are more stars in the universe than grains of sand on Earth.", image: "https://via.placeholder.com/300/FF4444" },
-            { text: "Octopuses have three hearts.", image: "https://via.placeholder.com/300/FF1144" },
-            { text: "The Eiffel Tower can be 15 cm taller during the summer.", image: "https://via.placeholder.com/300/FF0044" },
-            { text: "Some cats are allergic to humans.", image: "https://via.placeholder.com/300/FF00AA" },
-            { text: "A group of flamingos is called a 'flamboyance'.", image: "https://via.placeholder.com/300/FF00FF" },
-            { text: "The unicorn is the national animal of Scotland.", image: "https://via.placeholder.com/300/AA00FF" },
-            { text: "Bees sometimes sting other bees.", image: "https://via.placeholder.com/300/5500FF" }
+            {
+                text: "Earth is the third planet from the Sun.",
+                image: "https://example.com/image1.jpg"
+            },
+            {
+                text: "Approximately 71% of Earth's surface is covered by water.",
+                image: "https://example.com/image2.jpg"
+            },
+            {
+                text: "Earth is the only known planet to support life.",
+                image: "https://example.com/image3.jpg"
+            },
+            {
+                text: "Earth has one natural satellite, the Moon.",
+                image: "https://example.com/image4.jpg"
+            },
+            {
+                text: "The Earth's atmosphere is composed of 78% nitrogen and 21% oxygen.",
+                image: "https://example.com/image5.jpg"
+            },
+            {
+                text: "Earth's rotation is gradually slowing down, at a rate of about 17 milliseconds per century.",
+                image: "https://example.com/image6.jpg"
+            },
+            {
+                text: "The Earth's core is composed primarily of iron and nickel.",
+                image: "https://example.com/image7.jpg"
+            },
+            {
+                text: "Earth's magnetic field protects it from solar and cosmic radiation.",
+                image: "https://example.com/image8.jpg"
+            },
+            {
+                text: "The highest point on Earth is Mount Everest, which is 8,848 meters above sea level.",
+                image: "https://example.com/image9.jpg"
+            },
+            {
+                text: "The Earth's age is estimated to be about 4.54 billion years.",
+                image: "https://example.com/image10.jpg"
+            }
         ];
 
-        document.getElementById('generate-btn').addEventListener('click', function() {
+        document.getElementById('generateFact').addEventListener('click', function() {
             const randomIndex = Math.floor(Math.random() * facts.length);
             const fact = facts[randomIndex];
-            document.getElementById('fact').innerText = fact.text;
-            document.getElementById('fact-image').src = fact.image;
+            document.getElementById('factText').textContent = fact.text;
+            const factImage = document.getElementById('factImage');
+            factImage.src = fact.image;
+            factImage.style.display = 'block';
         });
     </script>
 </body>
